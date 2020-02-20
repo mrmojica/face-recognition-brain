@@ -7,6 +7,7 @@
   justify-content: center;
 }
 
+/* Make sure particles covers full background */
 .particles {
   position: fixed;
   top: 0;
