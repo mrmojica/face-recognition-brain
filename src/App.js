@@ -55,15 +55,15 @@ const App = () => {
     setImageUrl(inputValue);
 
     app.models
-      .predict(
-        Clarifai.GENERAL_MODEL,
-        "https://samples.clarifai.com/metro-north.jpg",
-        { language: "en" }
-      )
+      .predict(Clarifai.FACE_DETECT_MODEL, inputValue, { language: "en" })
       .then(
         function(response) {
           // do something with response
           console.log(response);
+          // get bounding_box
+          console.log(
+            response.outputs[0].data.regions[0].region_info.bounding_box
+          );
         },
         function(err) {
           // there was an error
