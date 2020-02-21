@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkeForm";
 import Rank from "./components/Rank/Rank";
@@ -34,7 +35,9 @@ const particlesOptions = {
 };
 
 const App = () => {
+  // sample image: https://samples.clarifai.com/metro-north.jpg
   const [inputValue, setInputValue] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState("");
 
   const onInputChange = event => {
     console.log("value", event.target.value);
@@ -48,6 +51,8 @@ const App = () => {
 
     console.log("submitted");
     console.log(CLARAFAI_API_KEY);
+
+    setImageUrl(inputValue);
 
     app.models
       .predict(
@@ -76,7 +81,7 @@ const App = () => {
         onInputChange={onInputChange}
         onButtonSubmit={onButtonSubmit}
       />
-      {/* <FaceRecognition /> */}
+      <FaceRecognition imageUrl={imageUrl} />
     </div>
   );
 };
