@@ -35,9 +35,29 @@ const particlesOptions = {
 };
 
 const App = () => {
-  // sample image: https://samples.clarifai.com/metro-north.jpg
+  // sample image: https://i.ytimg.com/vi/2PI12ak6Iyo/maxresdefault.jpg
   const [inputValue, setInputValue] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const [boxList, setBoxList] = React.useState([]);
+
+  const calculateFaceLocations = data => {
+    const image = document.getElementById("inputImage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    const facesLocated = data.outputs[0].data.regions;
+
+    return facesLocated.map(faceData => {
+    // ClarifaiFace value that gives location of face example:
+    // {top_row: 0.5038523, left_col: 0.6625626, bottom_row: 0.5276079, right_col: 0.6763894}
+      const clarifaiFace = faceData.region_info.bounding_box;
+
+      return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height
+    }})
+  };
 
   const onInputChange = event => {
     console.log("value", event.target.value);
@@ -49,26 +69,12 @@ const App = () => {
       throw new Error("You must set environment variable for clarafai apiKey");
     }
 
-    console.log("submitted");
-    console.log(CLARAFAI_API_KEY);
-
     setImageUrl(inputValue);
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, inputValue, { language: "en" })
-      .then(
-        function(response) {
-          // do something with response
-          console.log(response);
-          // get bounding_box
-          console.log(
-            response.outputs[0].data.regions[0].region_info.bounding_box
-          );
-        },
-        function(err) {
-          // there was an error
-        }
-      );
+      .then(response => setBoxList(calculateFaceLocations(response)))
+      .catch(err => console.log(err));
   };
 
   return (
@@ -81,7 +87,7 @@ const App = () => {
         onInputChange={onInputChange}
         onButtonSubmit={onButtonSubmit}
       />
-      <FaceRecognition imageUrl={imageUrl} />
+      <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
     </div>
   );
 };
