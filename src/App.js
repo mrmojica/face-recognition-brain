@@ -42,6 +42,7 @@ const App = () => {
   const [imageUrl, setImageUrl] = React.useState("");
   const [boxList, setBoxList] = React.useState([]);
   const [route, setRoute] = React.useState("signin");
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
 
   const calculateFaceLocations = data => {
     const image = document.getElementById("inputImage");
@@ -63,7 +64,10 @@ const App = () => {
     });
   };
 
-  const onRouteChange = newRoute => setRoute(newRoute);
+  const onRouteChange = newRoute => {
+    setIsSignedIn(newRoute === "home");
+    setRoute(newRoute);
+  };
 
   const onInputChange = event => {
     console.log("value", event.target.value);
@@ -86,7 +90,7 @@ const App = () => {
   return (
     <div className="App">
       <Particles className="particles" params={particlesOptions} />
-      <Navigation onRouteChange={onRouteChange} />
+      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} />
       {route === "home" ? (
         <div>
           <Logo />
