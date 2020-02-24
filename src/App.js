@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
+import SignIn from "./components/SignIn/SignIn";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkeForm";
@@ -81,6 +82,7 @@ const App = () => {
     <div className="App">
       <Particles className="particles" params={particlesOptions} />
       <Navigation />
+      <SignIn />
       <Logo />
       <Rank />
       <ImageLinkForm
