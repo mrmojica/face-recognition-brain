@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
+import Register from "./components/Register/Register";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkeForm";
@@ -86,9 +87,7 @@ const App = () => {
     <div className="App">
       <Particles className="particles" params={particlesOptions} />
       <Navigation onRouteChange={onRouteChange} />
-      {route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} />
-      ) : (
+      {route === "home" ? (
         <div>
           <Logo />
           <Rank />
@@ -98,6 +97,10 @@ const App = () => {
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
         </div>
+      ) : route === "signin" ? (
+        <SignIn onRouteChange={onRouteChange} />
+      ) : (
+        <Register onRouteChange={onRouteChange} />
       )}
     </div>
   );
