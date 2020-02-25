@@ -44,6 +44,14 @@ const App = () => {
   const [route, setRoute] = React.useState("signin");
   const [isSignedIn, setIsSignedIn] = React.useState(false);
 
+  // TODO: remove when app is complete
+  // Check we can connect to server
+  React.useEffect(() => {
+    fetch("http://localhost:3001/")
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []);
+
   const calculateFaceLocations = data => {
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
