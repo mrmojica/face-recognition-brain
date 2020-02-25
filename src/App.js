@@ -123,7 +123,7 @@ const App = () => {
       ) : route === "signin" ? (
         <SignIn onRouteChange={onRouteChange} />
       ) : (
-        <Register onRouteChange={onRouteChange} />
+        <Register onRouteChange={onRouteChange} setUser={setUser} />
       )}
     </div>
   );
