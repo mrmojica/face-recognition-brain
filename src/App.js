@@ -12,6 +12,14 @@ import Particles from "react-particles-js";
 import Clarifai from "clarifai";
 
 const CLARAFAI_API_KEY = process.env.REACT_APP_CLARIFAI_API_KEY;
+const INITIAL_USER_INFO = {
+  id: "",
+  name: "",
+  email: "",
+  password: "",
+  entries: 0,
+  joined: ""
+};
 
 const app = new Clarifai.App({
   apiKey: CLARAFAI_API_KEY
@@ -43,6 +51,9 @@ const App = () => {
   const [boxList, setBoxList] = React.useState([]);
   const [route, setRoute] = React.useState("signin");
   const [isSignedIn, setIsSignedIn] = React.useState(false);
+  const [user, setUser] = React.useState(INITIAL_USER_INFO);
+
+  console.log("userInfo", user);
 
   // TODO: remove when app is complete
   // Check we can connect to server
