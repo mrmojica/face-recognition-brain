@@ -93,7 +93,7 @@ const App = () => {
     setInputValue(event.target.value);
   };
 
-  const onButtonSubmit = () => {
+  const onPictureSubmit = () => {
     if (!CLARAFAI_API_KEY) {
       throw new Error("You must set environment variable for clarafai apiKey");
     }
@@ -102,7 +102,20 @@ const App = () => {
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, inputValue, { language: "en" })
-      .then(response => setBoxList(calculateFaceLocations(response)))
+      .then(response => {
+        if (response) {
+          // Need to update the users entries count for each picture submitted.
+          fetch("http://localhost:3001/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: user.id })
+          })
+            .then(response => response.json())
+            .then(count => setUser({ ...user, entries: count }));
+        }
+
+        setBoxList(calculateFaceLocations(response));
+      })
       .catch(err => console.log(err));
   };
 
@@ -116,12 +129,12 @@ const App = () => {
           <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
-            onButtonSubmit={onButtonSubmit}
+            onPictureSubmit={onPictureSubmit}
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
         </div>
       ) : route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} />
+        <SignIn onRouteChange={onRouteChange} setUser={setUser} />
       ) : (
         <Register onRouteChange={onRouteChange} setUser={setUser} />
       )}
