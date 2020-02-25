@@ -113,7 +113,7 @@ const App = () => {
       {route === "home" ? (
         <div>
           <Logo />
-          <Rank />
+          <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onButtonSubmit={onButtonSubmit}
