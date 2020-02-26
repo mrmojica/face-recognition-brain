@@ -14,10 +14,13 @@ const SignIn = ({ onRouteChange, setUser }) => {
       body: JSON.stringify({ email, password })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user) {
-          setUser(user);
+      .then(data => {
+        if (data.success) {
+          setUser(data.user);
           onRouteChange("home");
+        } else {
+          // TODO: update UI to give better feedback.
+          console.log(data.errorMessage);
         }
       });
   };
