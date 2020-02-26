@@ -12,10 +12,13 @@ const Register = ({ onRouteChange, setUser }) => {
       body: JSON.stringify({ name, email, password })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user) {
-          setUser(user);
+      .then(response => {
+        if (response.success) {
+          setUser(response.user);
           onRouteChange("home");
+        } else {
+          // TODO: update UI to give better feedback.
+          console.log(response.errorMessage);
         }
       });
   };
