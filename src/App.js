@@ -53,16 +53,6 @@ const App = () => {
   const [isSignedIn, setIsSignedIn] = React.useState(false);
   const [user, setUser] = React.useState(INITIAL_USER_INFO);
 
-  console.log("userInfo", user);
-
-  // TODO: remove when app is complete
-  // Check we can connect to server
-  React.useEffect(() => {
-    fetch("http://localhost:3001/")
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }, []);
-
   const calculateFaceLocations = data => {
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
