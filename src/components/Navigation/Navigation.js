@@ -1,6 +1,7 @@
 import React from "react";
 
 const Navigation = ({ onRouteChange, isSignedIn }) => {
+  // TODO: clear user and image state
   return isSignedIn ? (
     <nav style={{ display: "flex", justifyContent: "flex-end" }}>
       <p
