@@ -5,23 +5,22 @@ const Register = ({ onRouteChange, setUser }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const onSubmitRegister = () => {
+  const onSubmitRegister = () =>
     fetch("http://localhost:3001/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password })
     })
       .then(response => response.json())
-      .then(response => {
-        if (response.success) {
-          setUser(response.user);
+      .then(data => {
+        if (data.success) {
+          setUser(data.user);
           onRouteChange("home");
         } else {
           // TODO: update UI to give better feedback.
-          console.log(response.errorMessage);
+          console.log(data.errorMessage);
         }
       });
-  };
 
   return (
     <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
