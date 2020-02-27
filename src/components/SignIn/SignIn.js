@@ -5,6 +5,10 @@ class SignIn extends React.Component {
     super(props);
     this.emailInput = React.createRef();
     this.passwordInput = React.createRef();
+
+    this.state = {
+      errorMessage: ""
+    };
   }
 
   handleSubmit = event => {
@@ -26,8 +30,7 @@ class SignIn extends React.Component {
           setUser(data.user);
           onRouteChange("home");
         } else {
-          // TODO: update UI to give better feedback.
-          console.log(data.errorMessage);
+          this.setState({ errorMessage: data.errorMessage });
         }
       });
   };
@@ -62,18 +65,18 @@ class SignIn extends React.Component {
                 />
               </div>
             </fieldset>
-            <div className="">
-              <input
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                type="submit"
-                value="Submit"
-              />
+            <input
+              className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+              type="submit"
+              value="Submit"
+            />
+            <div className="lh-copy" style={{ height: "10px" }}>
+              <p className="f5 black db">{this.state.errorMessage}</p>
             </div>
             <div className="lh-copy mt3">
               <p
                 onClick={() => this.props.onRouteChange("register")}
-                href="#0"
-                className="f6 link dim black db pointer"
+                className="f4 link dim black db pointer"
               >
                 Register
               </p>
