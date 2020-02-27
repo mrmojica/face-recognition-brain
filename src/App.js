@@ -53,7 +53,6 @@ const App = () => {
   };
 
   const calculateFaceLocations = data => {
-    console.log("data", data);
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
     const height = Number(image.height);
