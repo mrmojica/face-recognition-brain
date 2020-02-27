@@ -1,7 +1,7 @@
 import React from "react";
 import "./ImageLinkForm.css";
 
-const ImageLinkForm = ({ onInputChange, onPictureSubmit }) => (
+const ImageLinkForm = ({ setImageUrl, onPictureSubmit }) => (
   <>
     <p className="f3">
       This Magic Brain will detect faces in your pictures. Give it a try!
@@ -11,7 +11,7 @@ const ImageLinkForm = ({ onInputChange, onPictureSubmit }) => (
         <input
           className="f4 pa2 w-70 center"
           type="text"
-          onChange={onInputChange}
+          onChange={event => setImageUrl(event.target.value)}
         />
         <button
           className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple"

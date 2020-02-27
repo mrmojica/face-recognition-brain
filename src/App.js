@@ -40,15 +40,12 @@ const particlesOptions = {
 // TODO: add ErrorBoundary component
 
 const App = () => {
-  // sample image: https://i.ytimg.com/vi/2PI12ak6Iyo/maxresdefault.jpg
-  const [inputValue, setInputValue] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const [boxList, setBoxList] = React.useState([]);
   const [route, setRoute] = React.useState("signin");
   const [user, setUser] = React.useState(INITIAL_USER_INFO);
 
   const handleSignOut = () => {
-    setInputValue("");
     setImageUrl("");
     setBoxList([]);
     setRoute("signin");
@@ -56,6 +53,7 @@ const App = () => {
   };
 
   const calculateFaceLocations = data => {
+    console.log("data", data);
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
     const height = Number(image.height);
@@ -75,14 +73,8 @@ const App = () => {
     });
   };
 
-  const onInputChange = event => {
-    setInputValue(event.target.value);
-  };
-
-  const onPictureSubmit = () => {
-    setImageUrl(inputValue);
-
-    fetch("https://mysterious-sands-57067.herokuapp.com/imageurl", {
+  const onPictureSubmit = () =>
+    fetch("https://mysterious-sands-57067.herokuapp.com/imageUrl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ imageUrl: imageUrl })
@@ -104,7 +96,6 @@ const App = () => {
         setBoxList(calculateFaceLocations(response));
       })
       .catch(err => console.log(err));
-  };
 
   const content = route => {
     if (route === "home") {
@@ -112,7 +103,7 @@ const App = () => {
         <>
           <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
-            onInputChange={onInputChange}
+            setImageUrl={setImageUrl}
             onPictureSubmit={onPictureSubmit}
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
