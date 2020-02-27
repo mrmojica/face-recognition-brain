@@ -4,7 +4,6 @@ import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
-import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkeForm";
 import Rank from "./components/Rank/Rank";
 import "tachyons";
@@ -113,15 +112,14 @@ const App = () => {
   const content = route => {
     if (route === "home") {
       return (
-        <div>
-          <Logo />
+        <>
           <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onPictureSubmit={onPictureSubmit}
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
-        </div>
+        </>
       );
     } else if (route === "signin") {
       return <SignIn setRoute={setRoute} setUser={setUser} />;

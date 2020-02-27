@@ -1,8 +1,10 @@
 import React from "react";
+import Logo from "../Logo/Logo";
 
 const Navigation = ({ setRoute, route, handleSignOut }) =>
   route === "home" ? (
-    <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+    <nav style={{ display: "flex", justifyContent: "space-between" }}>
+      <Logo />
       <p
         onClick={() => handleSignOut()}
         className="f3 link dim black underline pa3 pointer"
