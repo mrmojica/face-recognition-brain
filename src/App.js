@@ -82,7 +82,7 @@ const App = () => {
   const onPictureSubmit = () => {
     setImageUrl(inputValue);
 
-    fetch("http://localhost:3001/imageurl", {
+    fetch("https://mysterious-sands-57067.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ imageUrl: imageUrl })
@@ -91,7 +91,7 @@ const App = () => {
       .then(response => {
         if (response) {
           // Need to update the users entries count for each picture submitted.
-          fetch("http://localhost:3001/image", {
+          fetch("https://mysterious-sands-57067.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: user.id })
