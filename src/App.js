@@ -8,9 +8,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkeForm";
 import Rank from "./components/Rank/Rank";
 import "tachyons";
 import Particles from "react-particles-js";
-import Clarifai from "clarifai";
 
-const CLARAFAI_API_KEY = process.env.REACT_APP_CLARIFAI_API_KEY;
 const INITIAL_USER_INFO = {
   id: "",
   name: "",
@@ -19,10 +17,6 @@ const INITIAL_USER_INFO = {
   entries: 0,
   joined: ""
 };
-
-const app = new Clarifai.App({
-  apiKey: CLARAFAI_API_KEY
-});
 
 const particlesOptions = {
   particles: {
@@ -86,14 +80,14 @@ const App = () => {
   };
 
   const onPictureSubmit = () => {
-    if (!CLARAFAI_API_KEY) {
-      throw new Error("You must set environment variable for clarafai apiKey");
-    }
-
     setImageUrl(inputValue);
 
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, inputValue, { language: "en" })
+    fetch("http://localhost:3001/imageurl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imageUrl: imageUrl })
+    })
+      .then(response => response.json())
       .then(response => {
         if (response) {
           // Need to update the users entries count for each picture submitted.
