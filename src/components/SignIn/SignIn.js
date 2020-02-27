@@ -68,7 +68,7 @@ class SignIn extends React.Component {
             <input
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
-              value="Submit"
+              value="Sign In"
             />
             <div className="lh-copy" style={{ height: "10px" }}>
               <p className="f5 black db">{this.state.errorMessage}</p>

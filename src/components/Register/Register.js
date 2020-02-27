@@ -82,7 +82,7 @@ class Register extends React.Component {
               <input
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
-                value="Submit"
+                value="Register"
               />
             </div>
             <div className="lh-copy" style={{ height: "10px" }}>
