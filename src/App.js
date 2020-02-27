@@ -50,7 +50,6 @@ const App = () => {
   const [imageUrl, setImageUrl] = React.useState("");
   const [boxList, setBoxList] = React.useState([]);
   const [route, setRoute] = React.useState("signin");
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
   const [user, setUser] = React.useState(INITIAL_USER_INFO);
 
   const calculateFaceLocations = data => {
@@ -73,13 +72,7 @@ const App = () => {
     });
   };
 
-  const onRouteChange = newRoute => {
-    setIsSignedIn(newRoute === "home");
-    setRoute(newRoute);
-  };
-
   const onInputChange = event => {
-    console.log("value", event.target.value);
     setInputValue(event.target.value);
   };
 
@@ -109,11 +102,9 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const content = route => {
+    if (route === "home") {
   return (
-    <div className="App">
-      <Particles className="particles" params={particlesOptions} />
-      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} />
-      {route === "home" ? (
         <div>
           <Logo />
           <Rank name={user.name} entries={user.entries} />
@@ -123,11 +114,19 @@ const App = () => {
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
         </div>
-      ) : route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} setUser={setUser} />
-      ) : (
-        <Register onRouteChange={onRouteChange} setUser={setUser} />
-      )}
+      );
+    } else if (route === "signin") {
+      return <SignIn setRoute={setRoute} setUser={setUser} />;
+    } else {
+      return <Register setRoute={setRoute} setUser={setUser} />;
+    }
+  };
+
+  return (
+    <div className="App">
+      <Particles className="particles" params={particlesOptions} />
+      <Navigation setRoute={setRoute} route={route} />
+      {content(route)}
     </div>
   );
 };

@@ -12,7 +12,7 @@ class SignIn extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onRouteChange, setUser } = this.props;
+    const { setRoute, setUser } = this.props;
 
     event.preventDefault();
 
@@ -28,7 +28,7 @@ class SignIn extends React.Component {
       .then(data => {
         if (data.success) {
           setUser(data.user);
-          onRouteChange("home");
+          setRoute("home");
         } else {
           this.setState({ errorMessage: data.errorMessage });
         }
@@ -75,7 +75,7 @@ class SignIn extends React.Component {
             </div>
             <div className="lh-copy mt3">
               <p
-                onClick={() => this.props.onRouteChange("register")}
+                onClick={() => this.props.setRoute("register")}
                 className="f4 link dim black db pointer"
               >
                 Register

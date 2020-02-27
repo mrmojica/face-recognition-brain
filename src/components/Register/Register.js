@@ -13,7 +13,7 @@ class Register extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onRouteChange, setUser } = this.props;
+    const { setRoute, setUser } = this.props;
 
     event.preventDefault();
 
@@ -30,7 +30,7 @@ class Register extends React.Component {
       .then(data => {
         if (data.success) {
           setUser(data.user);
-          onRouteChange("home");
+          setRoute("home");
         } else {
           this.setState({ errorMessage: data.errorMessage });
         }
