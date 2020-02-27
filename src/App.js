@@ -43,6 +43,8 @@ const particlesOptions = {
   }
 };
 
+// TODO: add ErrorBoundary component
+
 const App = () => {
   // sample image: https://i.ytimg.com/vi/2PI12ak6Iyo/maxresdefault.jpg
   const [inputValue, setInputValue] = React.useState("");
@@ -101,7 +103,8 @@ const App = () => {
             body: JSON.stringify({ id: user.id })
           })
             .then(response => response.json())
-            .then(count => setUser({ ...user, entries: count }));
+            .then(count => setUser({ ...user, entries: count }))
+            .catch(err => console.log(err));
         }
 
         setBoxList(calculateFaceLocations(response));

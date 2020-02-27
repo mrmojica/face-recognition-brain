@@ -34,7 +34,8 @@ class Register extends React.Component {
         } else {
           this.setState({ errorMessage: data.errorMessage });
         }
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
