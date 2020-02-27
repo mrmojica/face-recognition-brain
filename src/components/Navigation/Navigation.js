@@ -1,11 +1,10 @@
 import React from "react";
 
-const Navigation = ({ setRoute, route }) => {
-  // TODO: clear user and image state
-  return route === "home" ? (
+const Navigation = ({ setRoute, route, handleSignOut }) =>
+  route === "home" ? (
     <nav style={{ display: "flex", justifyContent: "flex-end" }}>
       <p
-        onClick={() => setRoute("signin")}
+        onClick={() => handleSignOut()}
         className="f3 link dim black underline pa3 pointer"
       >
         Sign Out
@@ -29,6 +28,5 @@ const Navigation = ({ setRoute, route }) => {
       </nav>
     </>
   );
-};
 
 export default Navigation;

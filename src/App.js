@@ -52,6 +52,14 @@ const App = () => {
   const [route, setRoute] = React.useState("signin");
   const [user, setUser] = React.useState(INITIAL_USER_INFO);
 
+  const handleSignOut = () => {
+    setInputValue("");
+    setImageUrl("");
+    setBoxList([]);
+    setRoute("signin");
+    setUser(INITIAL_USER_INFO);
+  };
+
   const calculateFaceLocations = data => {
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
@@ -104,7 +112,7 @@ const App = () => {
 
   const content = route => {
     if (route === "home") {
-  return (
+      return (
         <div>
           <Logo />
           <Rank name={user.name} entries={user.entries} />
@@ -125,7 +133,11 @@ const App = () => {
   return (
     <div className="App">
       <Particles className="particles" params={particlesOptions} />
-      <Navigation setRoute={setRoute} route={route} />
+      <Navigation
+        setRoute={setRoute}
+        route={route}
+        handleSignOut={handleSignOut}
+      />
       {content(route)}
     </div>
   );
