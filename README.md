@@ -10,3 +10,10 @@ This application allows users to detect faces on images using the Clarafai API. 
 - Tachyons
 
 ## Server (https://github.com/mrmojica/face-recognition-brain-api)
+
+- Node/ Express
+- Knex
+- PostgreSQL
+- Bcrypt
+- Cors
+- Clarafai API
