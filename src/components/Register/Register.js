@@ -81,7 +81,7 @@ class Register extends React.Component {
             </fieldset>
             <div>
               <input
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                className="b ph3 pv2 input-reset ba b--black grow pointer f6 dib button"
                 type="submit"
                 value="Register"
               />

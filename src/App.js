@@ -37,8 +37,6 @@ const particlesOptions = {
   }
 };
 
-// TODO: add ErrorBoundary component
-
 const App = () => {
   const [imageUrl, setImageUrl] = React.useState("");
   const [boxList, setBoxList] = React.useState([]);
