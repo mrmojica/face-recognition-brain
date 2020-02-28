@@ -70,6 +70,11 @@ const App = () => {
     });
   };
 
+  const onChangeInput = inputValue => {
+    setBoxList([]);
+    setImageUrl(inputValue);
+  };
+
   const onPictureSubmit = () =>
     fetch("https://mysterious-sands-57067.herokuapp.com/imageUrl", {
       method: "post",
@@ -100,7 +105,7 @@ const App = () => {
         <>
           <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
-            setImageUrl={setImageUrl}
+            onChangeInput={onChangeInput}
             onPictureSubmit={onPictureSubmit}
           />
           <FaceRecognition boxList={boxList} imageUrl={imageUrl} />
